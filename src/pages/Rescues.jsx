@@ -11,12 +11,11 @@ import Modal from "../components/Modal";
 import Pagination from "../components/Pagination";
 import { Search, Eye, Edit2, Trash2, Calendar, ChevronDown, ChevronLeft, ChevronRight, Clock, Loader2, CheckCircle2, XCircle, Upload, X, AlertTriangle, Play, Video } from "lucide-react";
 
-const USER_BACKEND_URL = import.meta.env.VITE_USER_BACKEND_URL || "http://localhost:5555";
 
 function resolveMediaUrl(url) {
   if (!url) return "";
   if (url.startsWith("http")) return url;
-  return `${USER_BACKEND_URL}${url}`;
+  return url;
 }
 
 const statusConfig = {

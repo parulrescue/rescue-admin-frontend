@@ -5,13 +5,10 @@ import { getRescue, updateRescueStatus } from "../api/rescue";
 import { useAuthStore } from "../store/authStore";
 import { ArrowLeft, MapPin, User, Phone, Image as ImageIcon, Video, Calendar, ChevronDown, Clock, Loader2, CheckCircle2, XCircle, Play, X, ChevronLeft, ChevronRight } from "lucide-react";
 
-const USER_BACKEND_URL = import.meta.env.VITE_USER_BACKEND_URL || "http://localhost:5555";
-const ADMIN_API_URL = import.meta.env.VITE_API_URL?.replace("/api/v1", "") || "http://localhost:5557";
-
 function resolveMediaUrl(url) {
   if (!url) return "";
   if (url.startsWith("http")) return url;
-  return `${USER_BACKEND_URL}${url}`;
+  return url;
 }
 
 const statusConfig = {
