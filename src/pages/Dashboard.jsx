@@ -13,6 +13,7 @@ const statusColors = {
 
 export default function Dashboard() {
   const admin = useAuthStore((s) => s.admin);
+  const isAdmin = admin?.role === "admin";
   const { data } = useQuery({
     queryKey: ["dashboard"],
     queryFn: getDashboardStats,
@@ -24,7 +25,7 @@ export default function Dashboard() {
     { label: "Total Users", value: stats.total_users ?? "—", icon: Users, color: "bg-blue-500" },
     { label: "Total Rescues", value: stats.total_rescues ?? "—", icon: ClipboardList, color: "bg-amber-500" },
     { label: "Today's Rescues", value: stats.today_rescues ?? "—", icon: TrendingUp, color: "bg-indigo-500" },
-    { label: "Net Balance", value: stats.net_balance != null ? `₹${Number(stats.net_balance).toLocaleString()}` : "—", icon: DollarSign, color: "bg-rose-500" },
+    ...(isAdmin ? [{ label: "Net Balance", value: stats.net_balance != null ? `₹${Number(stats.net_balance).toLocaleString()}` : "—", icon: DollarSign, color: "bg-rose-500" }] : []),
   ];
 
   return (
@@ -52,7 +53,7 @@ export default function Dashboard() {
         ))}
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+      <div className={`grid grid-cols-1 ${isAdmin ? "lg:grid-cols-2" : ""} gap-6`}>
         {/* Recent Rescues */}
         <div className="bg-white p-8 rounded-3xl border border-slate-200 shadow-sm">
           <div className="flex items-center justify-between mb-6">
@@ -90,7 +91,8 @@ export default function Dashboard() {
           )}
         </div>
 
-        {/* Recent Ledger */}
+        {/* Recent Ledger — admin only */}
+        {isAdmin && (
         <div className="bg-white p-8 rounded-3xl border border-slate-200 shadow-sm">
           <div className="flex items-center justify-between mb-6">
             <h3 className="text-lg font-bold text-slate-900">Recent Transactions</h3>
@@ -124,6 +126,7 @@ export default function Dashboard() {
             </div>
           )}
         </div>
+        )}
       </div>
     </div>
   );
