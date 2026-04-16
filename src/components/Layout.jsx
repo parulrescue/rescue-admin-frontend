@@ -24,7 +24,7 @@ const allNavItems = [
   { to: "/animals", label: "Animals", icon: Dog, permission: "animal_view" },
   { to: "/rescues", label: "Rescues", icon: ClipboardList, permission: "rescue_view" },
   { to: "/to-addresses", label: "To Addresses", icon: MapPin, permission: "rescue_view" },
-  { to: "/ledger", label: "Admin Ledger", icon: BookOpen, permission: "__admin_only__" },
+  { to: "/ledger", label: "Admin Ledger", icon: BookOpen, permission: "ledger_view" },
 ];
 
 export default function Layout() {
